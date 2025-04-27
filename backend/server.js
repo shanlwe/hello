@@ -8,28 +8,36 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-//Endpoint to save moods
+//Endpoint to add mood and date
 app.post('/moods',(req,res) => {
-    const newMood = req.body.mood;
-
-    // Read existing moods
-    let moods = [];
+    const {mood,date} = req.body;
+    console.log('Received mood and date:',mood,date)
+    
+    if (!mood || !date){
+        return res.status(400).json({error:"Mood or date missing"});
+    }
+    // Read existing moods from file
+    let moods = {};
     if (fs.existsSync('moods.json')){
         moods = JSON.parse(fs.readFileSync('moods.json'))
     }
-
-    // Add new mood
-    moods.push(newMood);
+    
+    // If date exists add to today's date
+    if (moods[date]){
+        moods[date].push(mood);
+    } else { //add new entry for new date
+        moods[date] = [mood];
+    }
 
     // Save back to moods.json
     fs.writeFileSync('moods.json',JSON.stringify(moods,null,2));
 
-    res.send({message: 'Your mood is saved with me'})
+    res.json({message: 'Your mood is saved with me'})
 });
 
-// Endpoint to get moods 
+// Endpoint to get moods grouped by date
 app.get('/moods',(req,res) => {
-    let moods = [];
+    let moods = {};
     if (fs.existsSync('moods.json')){
         moods = JSON.parse(fs.readFileSync('moods.json'));
     }
