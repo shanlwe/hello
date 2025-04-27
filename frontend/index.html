@@ -1,0 +1,35 @@
+<h1>Tracky Moody</h1>
+
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset = "UTF-8">
+        <meta name="viewport" content = "width=device-width, initial-scale =1.0">
+        <title>Moode Tracker</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>Track Yo Mood</h1>
+            <div class="mood-input">
+                <label for="mood-select">How are you feeling today?</label>
+                <select id="mood-select">
+                    <option value="">Select your mood</option>
+                    <option value="Happy day, happy clay">Happy</option>
+                    <option value="Sad bad cow">Sad</option>
+                    <option value="Moootivated">Motivated</option>
+                    <option value="Overwhelmed moose">Overwhelmed</option>
+                    <option value="It's Em for Embarrassed">Embarrassed</option>
+                </select>
+                <button id="submit-mood">Submit Mood</button>
+            </div>
+
+            <div id="mood-display">
+                <h3>Your moods so far:</h3>
+                <ul id="mood-list"></ul>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>
