@@ -1,2 +1,5 @@
 # ignore ALL files in ANY directory 
 node_modules/
+
+# ignore all files
+**/.DS_Store

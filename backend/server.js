@@ -10,8 +10,9 @@ app.use(express.json());
 
 //Endpoint to add mood and date
 app.post('/moods',(req,res) => {
-    const {mood,date} = req.body;
-    console.log('Received mood and date:',mood,date)
+    const {mood,date,time} = req.body;
+    console.log(req.body);
+    console.log('Received mood date time:',mood,date,time);
     
     if (!mood || !date){
         return res.status(400).json({error:"Mood or date missing"});
@@ -24,9 +25,9 @@ app.post('/moods',(req,res) => {
     
     // If date exists add to today's date
     if (moods[date]){
-        moods[date].push(mood);
+        moods[date].push({mood,time});
     } else { //add new entry for new date
-        moods[date] = [mood];
+        moods[date] = [{mood,time}];
     }
 
     // Save back to moods.json
